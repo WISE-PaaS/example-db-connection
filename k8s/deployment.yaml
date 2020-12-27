@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-example-stan
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      component: db-examples
+      uploader: stanley-yeh
+  template:
+    metadata:
+      labels:
+        component: db-examples
+        uploader: stanley-yeh
+    spec:
+      containers:
+        - name: wp-database-examples
+          image: stanleyy/wp-database-examples:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: 20m
+              memory: 32Mi
+              ephemeral-storage: 16Mi
+            requests:
+              cpu: 20m
+              memory: 32Mi
+          env:
+            - name: ENSAAS_SERVICES
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-lab-devspace-secret
+                  key: ENSAAS_SERVICES

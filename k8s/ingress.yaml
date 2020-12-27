@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: db-example-stan
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: db-example-stan.devspace.eks004.en.internal
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: db-example-stan
+              servicePort: 3000

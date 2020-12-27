@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-example-stan
+spec:
+  type: ClusterIP
+  selector:
+    component: db-examples
+    uploader: stanley-yeh
+  ports:
+    - port: 3000
+      targetPort: 5000
