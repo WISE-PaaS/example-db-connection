@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db-example-stan
+  name: {{ create your deployment name as 'db-example-yourNameNoSpace' }}
 spec:
   replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
       component: db-examples
-      uploader: stanley-yeh
+      uploader: {{ insert your name withour spaces }}
   template:
     metadata:
       labels:
         component: db-examples
-        uploader: stanley-yeh
+        uploader: {{ insert your name withour spaces }}
     spec:
       containers:
         - name: wp-database-examples
-          image: stanleyy/wp-database-examples:1.0
+          image: {{ insert image name from your Docker hub }}
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -33,5 +33,5 @@ spec:
             - name: ENSAAS_SERVICES
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-lab-devspace-secret
+                  name: {{ insert your secret }}
                   key: ENSAAS_SERVICES

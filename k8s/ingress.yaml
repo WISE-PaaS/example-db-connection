@@ -1,15 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: db-example-stan
+  name: {{ create your ingress name as 'db-example-yourNameNoSpace' }}
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: db-example-stan.devspace.eks004.en.internal
+    # host name should have the format ingressMetadataName.namespace.cluster.en.internal
+    - host: {{ create your host name }}
       http:
         paths:
           - path: /
             backend:
-              serviceName: db-example-stan
+              serviceName: {{ insert the name under metadata in service.yaml }}
               servicePort: 3000
